@@ -12,14 +12,11 @@ public class Main {
         int max = Integer.MIN_VALUE;
         int min = Integer.MAX_VALUE;
         
+        int current;
         for(int i = 0; i < testCase; i++) {
-            int current = Integer.parseInt(st.nextToken());
-            if(current < min) {
-                min = current;
-            }
-            if(current > max) {
-                max = current;
-            }
+            current = Integer.parseInt(st.nextToken());
+            min = Math.min(min, current);
+            max = Math.max(max, current);
         }
         
         bw.append(min + " " + max);
