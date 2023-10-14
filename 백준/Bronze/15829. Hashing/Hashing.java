@@ -10,10 +10,12 @@ public class Main {
         String input = br.readLine();
         
         long sum = 0;
+        long pow = 1;
         for(int i = 0; i < input.length(); i++) {
-            sum += (long)(input.charAt(i) - 'a' + 1) * (Math.pow(31, i) % 1234567891L);
+            sum += (input.charAt(i) - 'a' + 1) * pow;
+            pow = pow * 31 % 1234567891L;
         }
-        bw.append(sum + "");
+        bw.append(sum % 1234567891L + "");
         bw.close();
     }
 }
