@@ -23,15 +23,11 @@ public class Main {
                 map.put(key, map.getOrDefault(key, 0) + 1);
             }
             
-            if(map.size() == 1) {
-                bw.append(n + "\n");
-            } else {
-                long answer = 1;
-                for(int i : map.values()) {
-                    answer *= i + 1;
-                }
-                bw.append(answer - 1 + "\n");
+            long answer = 1;
+            for(int i : map.values()) {
+                answer *= i + 1;
             }
+            bw.append(answer - 1 + "\n");
         }
         bw.close();
     }
