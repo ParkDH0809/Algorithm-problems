@@ -16,7 +16,7 @@ public class Main {
 
         int answer = 1;
         Queue<Integer> queue = new LinkedList<>();
-        int[] visited = new int[200001];
+        int[] visited = new int[100001];
         Arrays.fill(visited, Integer.MAX_VALUE);
         queue.add(N * 2);
         queue.add(N + 1);
