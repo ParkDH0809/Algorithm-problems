@@ -1,60 +1,54 @@
 import java.util.*;
 import java.io.*;
 
-class Solution {
-	static int[][] arr;
-	public static void main(String args[]) throws Exception {
+class Solution
+{
+	public static void main(String args[]) throws Exception
+	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
 		int T = Integer.parseInt(br.readLine());
 		for(int test_case = 1; test_case <= T; test_case++)
 		{
-			bw.append("#" + test_case + "\n");
-			
-			int n = Integer.parseInt(br.readLine());
-			arr = new int[n][n];
-			for(int i = 0; i < n; i++) {
-				StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-				for(int j = 0; j < n; j++) {
-					arr[i][j] = Integer.parseInt(st.nextToken());
-				}
-			}
-			
-			for(int i = 0;i < n; i++) {
-				bw.append(method1(i));
-				bw.append(method2(i));
-				bw.append(method3(i));
-				bw.append("\n");
-			}
+			int N = Integer.parseInt(br.readLine());
+            int[][] arr = new int[N][N];
+            for(int i = 0; i < N; i++) {
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                for(int j = 0; j < N; j++)
+                    arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+            
+            int[][] turn90 = turn(arr, N);
+            int[][] turn180 = turn(turn90, N);
+            int[][] turn270 = turn(turn180, N);
+            
+            bw.append("#" + test_case);
+            bw.newLine();
+            for(int i = 0; i < N; i++) {
+                bw.append(getLine(turn90, i));
+                bw.append(getLine(turn180, i));
+                bw.append(getLine(turn270, i));
+                bw.newLine();
+            }
 		}
-        bw.close();
-	}
-	
-	static String method1(int n) {
-		StringBuilder sb = new StringBuilder();
-		for(int i = arr.length - 1; i >= 0; i--) {
-			sb.append(arr[i][n]);
-		}
-		sb.append(" ");
-		return sb.toString();
-	}
-	
-	static String method2(int n) {
-		StringBuilder sb = new StringBuilder();
-		for(int i = arr.length - 1; i >= 0; i--) {
-			sb.append(arr[arr.length - n - 1][i]);
-		}
-		sb.append(" ");
-		return sb.toString();
-	}
-	
-	static String method3(int n) {
-		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < arr.length; i++) {
-			sb.append(arr[i][arr.length - n - 1]);
-		}
-		sb.append(" ");
-		return sb.toString();
-	}
+        bw.flush();
+	} 
+    
+    static int[][] turn(int[][] arr, int N) {
+        int[][] result = new int[N][N];
+        for(int i = 0; i < N; i++) 
+            for(int j = 0; j < N; j++)
+                result[i][N - j - 1] = arr[j][i];
+                
+        return result;
+    }
+    
+    static String getLine(int[][] arr, int n) {
+        StringBuilder sb = new StringBuilder();
+        for(int i =0; i < arr.length; i++) 
+        	sb.append(arr[n][i]);
+        sb.append(" ");
+        return sb.toString();
+    }
 }
