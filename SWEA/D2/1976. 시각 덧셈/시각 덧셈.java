@@ -1,27 +1,38 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
-class Solution {
-	public static void main(String args[]) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+class Solution
+{
+	public static void main(String args[]) throws Exception
+	{
+		
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        
 		int T = Integer.parseInt(br.readLine());
+
 		for(int test_case = 1; test_case <= T; test_case++)
 		{
 			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-			int h1 = Integer.parseInt(st.nextToken());
-			int m1 = Integer.parseInt(st.nextToken());
-			int h2 = Integer.parseInt(st.nextToken());
-			int m2 = Integer.parseInt(st.nextToken());
-			
-			
-			int m = (m1 + m2) % 60;
-			int h = ((m1 + m2) / 60 + h1 + h2) % 12;
-			if(h == 0)
-				h = 12;
-			bw.append("#" + test_case + " " + h + " " + m + "\n");
+            int hour = 0;
+            int minute = 0;
+            
+            hour += Integer.parseInt(st.nextToken());
+            minute += Integer.parseInt(st.nextToken());
+            hour += Integer.parseInt(st.nextToken());
+            minute += Integer.parseInt(st.nextToken());
+
+            if(minute >= 60) {
+                minute -= 60;
+                hour += 1;
+            }
+            
+            if(hour >= 13) {
+                hour -= 12;
+            }
+            
+            bw.append("#" + test_case + " " + hour + " " + minute);
+            bw.newLine();
 		}
-        bw.close();
+        bw.flush();
 	}
 }
