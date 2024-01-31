@@ -12,7 +12,6 @@ public class Main {
         
         int[] arr = new int[N + 1];
         st = new StringTokenizer(br.readLine(), " ");
-        arr[0] = 0;
         arr[1] = Integer.parseInt(st.nextToken());
         for(int i = 2; i <= N; i++) {
             arr[i] += Integer.parseInt(st.nextToken()) + arr[i-1]; 
