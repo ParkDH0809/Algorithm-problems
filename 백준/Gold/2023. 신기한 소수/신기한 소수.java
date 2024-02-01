@@ -6,35 +6,37 @@ public class Main {
 
 	static int N;
 	static int answer;
-
+	static StringBuilder sb;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
+		sb = new StringBuilder();
 
 		N = Integer.parseInt(br.readLine());
-		getAnswer("");
+		getAnswer(0, 0);
+		System.out.println(sb);
 	}
 	
-	static void getAnswer(String s) {
-		if(s.length() == N) {
-			System.out.println(s);
+	static void getAnswer(int number, int count) {
+		if(count == N) {
+			sb.append(number + "\n");
 			return;
 		}
+		
 		for(int i = 0; i <= 9; i++) {
-			if(!isPrime(Integer.parseInt(s+i))) {
-				continue;
+			int current = number * 10 + i;
+			if(isPrime(current)) {
+				getAnswer(current, count+1);
 			}
-			getAnswer(s + i);
 		}
 	}
 	
-	static boolean isPrime(int n) {
-		if(n == 0 || n == 1) {
+	static boolean isPrime(int number) {
+		if(number == 0 || number == 1) {
 			return false;
 		}
 		
-		for(int i = 2; i <= Math.sqrt(n); i++) {
-			if(n % i == 0) {
+		for(int i = 2; i <= Math.sqrt(number); i++) {
+			if(number % i == 0) {
 				return false;
 			}
 		}
