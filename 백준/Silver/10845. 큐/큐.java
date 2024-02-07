@@ -1,62 +1,57 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
-public class Main {
-    public static void main(String[] args) throws IOException  {
+class Main{
+    public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        Queue<Integer> q = new LinkedList<>();
         
-        Queue<String> queue = new LinkedList<>();
-       
         int N = Integer.parseInt(br.readLine());
-        StringTokenizer st;
-        String back = "";
-        for(int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine(), " ");
+        int num = 0;
+        int n = 0;
+        for (int i = 0; i < N; i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            String inst = st.nextToken();
 
-            switch(st.nextToken()) {
+            switch (inst){
                 case "push":
-                    back = st.nextToken();
-                    queue.add(back);
+                    num = Integer.parseInt(st.nextToken());
+                    q.add(num);
+                    n = num;
                     break;
-                    
                 case "pop":
-                    if(queue.isEmpty()) {
-                        bw.append("-1\n");
-                    } else {
-                        bw.append(queue.poll() + "\n");
-                    }
+                    if (q.isEmpty())
+                        System.out.println(-1);
+                    else
+                        System.out.println(q.poll());
                     break;
-                    
                 case "size":
-                    bw.append(queue.size() + "\n");
+                    System.out.println(q.size());
                     break;
-
                 case "empty":
-                    if(queue.isEmpty()) {
-                        bw.append("1\n");
-                    } else {
-                        bw.append("0\n");
-                    }
+                    if (q.isEmpty())
+                        System.out.println(1);
+                    else 
+                        System.out.println(0);
                     break;
-                
                 case "front":
-                    if(queue.isEmpty()) {
-                        bw.append("-1\n");
-                    } else {
-                        bw.append(queue.peek() + "\n");
-                    }
+                    if (q.isEmpty())
+                        System.out.println(-1);
+                    else
+                        System.out.println(q.peek());
                     break;
-                
-                case "back": 
-                    if(queue.isEmpty()) {
-                        bw.append("-1\n");
-                    } else {
-                        bw.append(back + "\n");
-                    }
+                case "back":
+                    if (q.isEmpty())
+                        System.out.println(-1);
+                    else
+                        System.out.println(n);
                     break;
             }
+            
         }
-        bw.close();
     }
 }
