@@ -9,23 +9,17 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	static int N;
-	static int M;
-	
-	static int[] indegree;
-	static List<ArrayList<Integer>> graph;
-
 	public static void main(String[] args) throws IOException {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
 		
-		indegree = new int[N+1];
-		graph = new ArrayList<>();
+		int[] indegree = new int[N+1];
+		List<ArrayList<Integer>> graph = new ArrayList<>();
 		for(int i = 0; i <= N; i++) {
 			graph.add(new ArrayList<>());
 		}
@@ -41,21 +35,21 @@ public class Main {
 
 		
 		Queue<Integer> queue = new ArrayDeque<>();
-		while(true) {
-			for(int i = 1; i <= N; i++) {
-				if(indegree[i] == 0) {
-					queue.add(i);
-					indegree[i] = -1;
-				}
+		for(int i = 1; i <= N; i++) {
+			if(indegree[i] == 0) {
+				queue.add(i);
+				indegree[i] = -1;
 			}
-			
-			if(queue.isEmpty()) {
-				break;
-			}
-			
+		}
+		
+		while(!queue.isEmpty()) {
 			int current = queue.poll();
 			for(int i : graph.get(current)) {
 				indegree[i]--;
+				
+				if(indegree[i] == 0) {
+					queue.add(i);
+				}
 			}
 			
 			sb.append(current + " ");
