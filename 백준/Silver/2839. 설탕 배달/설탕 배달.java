@@ -4,17 +4,17 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException  {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
         
         int N = Integer.parseInt(br.readLine());
         if(N % 5 == 0) {
-            bw.append((N / 5) + "");
+            sb.append((N / 5) + "");
         }
         
         if(N % 5 != 0) {
-            bw.append(calculate(N) + "");
+            sb.append(calculate(N) + "");
         }
-        bw.close();
+        System.out.print(sb);
     }
     
     public static int calculate(int N) {
