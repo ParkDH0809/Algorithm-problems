@@ -23,8 +23,6 @@ public class Main {
 		for (int i = 0; i < N; i++) {
 			if (arr[i] <= L) {
 				L++;
-			} else {
-				break;
 			}
 		}
 		System.out.println(L);
