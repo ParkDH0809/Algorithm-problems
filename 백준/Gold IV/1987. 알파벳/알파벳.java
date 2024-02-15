@@ -9,7 +9,6 @@ public class Main {
 	static int C;
 	static int answer;
 	static char[][] board;
-	static boolean[][] visited;
 	static boolean[] selected;
 	
 	public static void main(String[] args) throws IOException {
@@ -23,11 +22,9 @@ public class Main {
 		for(int i = 0; i < R; i++) {
 			board[i] = br.readLine().toCharArray(); 
 		}
-		visited = new boolean[R][C];
 		selected = new boolean[26];
 		
 		selected[board[0][0] - 'A'] = true;
-		visited[0][0] = true;
 		getAnswer(0, 0, 1);
 		
 		System.out.println(answer);
@@ -43,14 +40,12 @@ public class Main {
 			int nr = r + dr[dir];
 			int nc = c + dc[dir];
 			
-			if(nr < 0 || nr == R || nc < 0 || nc == C || visited[nr][nc] || selected[board[nr][nc] - 'A']) {
+			if(nr < 0 || nr == R || nc < 0 || nc == C || selected[board[nr][nc] - 'A']) {
 				continue;
 			}
 			
-			visited[nr][nc] = true;
 			selected[board[nr][nc] - 'A'] = true;
 			getAnswer(nr, nc, count+1);
-			visited[nr][nc] = false;
 			selected[board[nr][nc] - 'A'] = false;
 			
 		}
