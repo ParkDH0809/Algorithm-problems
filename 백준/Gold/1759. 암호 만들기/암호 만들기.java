@@ -35,8 +35,8 @@ public class Main {
 	static void combination(int start, int count, char[] selected, boolean[] visited) {
 		if(count == L) {
 			if(isCorrect(selected)) {
-				for(int i = 0; i < selected.length; i++) {
-					sb.append(selected[i]);
+				for(char c : selected) {
+					sb.append(c);
 				}
 				sb.append("\n");
 			}
