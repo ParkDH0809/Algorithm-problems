@@ -19,7 +19,7 @@ public class Main {
 		int M = Integer.parseInt(st.nextToken());
 		
 		int[] indegree = new int[N+1];
-		List<ArrayList<Integer>> graph = new ArrayList<>();
+		List<ArrayList<Integer>> graph = new ArrayList<>(N);
 		for(int i = 0; i <= N; i++) {
 			graph.add(new ArrayList<>());
 		}
@@ -38,7 +38,6 @@ public class Main {
 		for(int i = 1; i <= N; i++) {
 			if(indegree[i] == 0) {
 				queue.add(i);
-				indegree[i] = -1;
 			}
 		}
 		
@@ -52,7 +51,7 @@ public class Main {
 				}
 			}
 			
-			sb.append(current + " ");
+			sb.append(current).append(" ");
 		}
 		
 		System.out.println(sb);
