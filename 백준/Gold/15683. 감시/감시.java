@@ -90,10 +90,7 @@ public class Main {
 		int[] dx = { -1, 0, 1, 0 };
 		int[] dy = { 0, 1, 0, -1 };
 		
-		
-		
-		List<Integer> currentDirection = cctv.direction.get(currentCase);
-		for(int dir : currentDirection) {
+		for(int dir : cctv.direction[currentCase]) {
 			int x = cctv.x;
 			int y = cctv.y;
 			
@@ -139,7 +136,8 @@ class CCTV {
 
 	int x, y, type;
 	int numberOfCase;
-	List<List<Integer>> direction;
+	int[][] direction;
+	
 	CCTV(int x, int y, int type) {
 		this.x = x;
 		this.y = y;
@@ -150,47 +148,18 @@ class CCTV {
 			this.numberOfCase = 4;
 		}
 		
-		direction = new ArrayList<>();
-		for(int i = 0; i < numberOfCase; i++) {
-			direction.add(new ArrayList<>());
-		}
-		
 		switch(type) {
 		case 1:
-			direction.get(0).add(0);
-			direction.get(1).add(1);
-			direction.get(2).add(2);
-			direction.get(3).add(3);
+			direction = new int[][] {{0},{1},{2},{3}};
 			break;
 		case 2:
-			direction.get(0).add(0);
-			direction.get(0).add(2);
-			direction.get(1).add(1);
-			direction.get(1).add(3);
+			direction = new int[][] {{0,2}, {1,3}};
 			break;
 		case 3:
-			direction.get(0).add(0);
-			direction.get(0).add(1);
-			direction.get(1).add(1);
-			direction.get(1).add(2);
-			direction.get(2).add(2);
-			direction.get(2).add(3);
-			direction.get(3).add(3);
-			direction.get(3).add(0);
+			direction = new int[][] {{0,1}, {1,2}, {2,3}, {3,0}};
 			break;
 		case 4:
-			direction.get(0).add(0);
-			direction.get(0).add(1);
-			direction.get(0).add(2);
-			direction.get(1).add(1);
-			direction.get(1).add(2);
-			direction.get(1).add(3);
-			direction.get(2).add(2);
-			direction.get(2).add(3);
-			direction.get(2).add(0);
-			direction.get(3).add(3);
-			direction.get(3).add(0);
-			direction.get(3).add(1);
+			direction = new int[][] {{0,1,2},{1,2,3},{2,3,0},{3,0,1}};
 			break;
 		}
 	}
