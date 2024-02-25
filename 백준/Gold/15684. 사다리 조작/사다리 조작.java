@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -29,7 +28,7 @@ public class Main {
         }
         
         for(int i = 0; i <= 3; i++) {
-            getAnswer(0, i);
+            getAnswer(0, i, 1);
             if(flag) {
                 System.out.println(i);
                 return;
@@ -39,7 +38,7 @@ public class Main {
         System.out.println(-1);
     }
 
-    static void getAnswer(int count, int max) {
+    static void getAnswer(int count, int max, int height) {
         if(flag) {
             return;
         }
@@ -51,13 +50,14 @@ public class Main {
             return;
         }
 
-        for(int i = 1; i <= H; i++) {
+        for(int i = height; i <= H; i++) {
             for(int j = 1; j < N; j++) {
                 if(ladder[i][j] == 0 && ladder[i][j+1] == 0) {
                     ladder[i][j] = j+1;
                     ladder[i][j+1] = j;
-                    getAnswer(count+1, max);
-                    ladder[i][j] = ladder[i][j+1] = 0;
+                    getAnswer(count+1, max, i);
+                    ladder[i][j] = 0;
+                    ladder[i][j+1] = 0;
                 }
             }
             
