@@ -36,24 +36,44 @@ public class Main {
 		int r = Integer.parseInt(st.nextToken())-1;
 		int c = Integer.parseInt(st.nextToken())-1;
 		
-		PriorityQueue<Virus> pq = new PriorityQueue<>();
+		int minDistance = 201;
+		int minValue = 1001;
+		boolean isExist = false;
 		while(!queue.isEmpty()) {
 			Virus virus = queue.poll();
-			virus.setDistance(r, c);
-			pq.add(virus);
+			
+			int distance = Math.abs(r - virus.r) + Math.abs(c - virus.c);
+			if(distance > t) {
+				continue;
+			}
+			
+			if(distance > minDistance) {
+				continue;
+			}
+			
+			if(distance < minDistance) {
+				minDistance = distance;
+				minValue = virus.value;
+			} else {
+				if(minValue > virus.value) {
+					minValue = virus.value;
+				}
+			}
+			
+			isExist = true;
+			
 		}
-		
-		Virus virus = pq.poll();
-		if(virus.distance <= t) {
-			System.out.println(virus.value);
+
+		if(isExist) {
+			System.out.print(minValue);
 		} else {
-			System.out.println(0);
+			System.out.print(0);
 		}
 	}
 }
 
 
-class Virus implements Comparable<Virus> {
+class Virus {
 	
 	int r;
 	int c;
@@ -64,17 +84,5 @@ class Virus implements Comparable<Virus> {
 		this.r = r;
 		this.c = c;
 		this.value = value;
-	}
-	
-	void setDistance(int r, int c) {
-		distance = Math.abs(r - this.r) + Math.abs(c - this.c);
-	}
-	
-	@Override
-	public int compareTo(Virus o) {
-		if(distance != o.distance) {
-			return distance - o.distance;
-		}
-		return value - o.value;
 	}
 }
