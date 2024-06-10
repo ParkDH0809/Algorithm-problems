@@ -6,47 +6,45 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	static int n;
-	static int m;
-	static int[] parent;
-
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-
 		int T = Integer.parseInt(br.readLine());
+		int[] A = initArray(br);
+		int[] B = initArray(br);
+		System.out.print(getAnswer(T, initMap(A), B));
+	}
 
+	static int[] initArray(BufferedReader br) throws IOException {
 		int n = Integer.parseInt(br.readLine());
-		int[] A = new int[n];
-		st = new StringTokenizer(br.readLine());
+		int[] arr = new int[n];
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < n; i++) {
-			A[i] = Integer.parseInt(st.nextToken());
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
+		return arr;
+	}
 
-		int m = Integer.parseInt(br.readLine());
-		int[] B = new int[m];
-		st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < m; i++) {
-			B[i] = Integer.parseInt(st.nextToken());
-		}
-
+	static HashMap<Integer, Integer> initMap(int[] arr) {
 		HashMap<Integer, Integer> map = new HashMap<>();
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n - i; j++) {
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr.length - i; j++) {
 				int sum = 0;
 				for (int k = j; k <= j + i; k++) {
-					sum += A[k];
+					sum += arr[k];
 				}
 				map.put(sum, map.getOrDefault(sum, 0) + 1);
 			}
 		}
+		return map;
+	}
 
+	static long getAnswer(int T, HashMap<Integer, Integer> map, int[] arr) {
 		long answer = 0;
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < m - i; j++) {
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr.length - i; j++) {
 				int sum = 0;
 				for (int k = j; k <= j + i; k++) {
-					sum += B[k];
+					sum += arr[k];
 				}
 
 				if (map.containsKey(T - sum)) {
@@ -54,7 +52,6 @@ public class Main {
 				}
 			}
 		}
-
-		System.out.print(answer);
+		return answer;
 	}
 }
