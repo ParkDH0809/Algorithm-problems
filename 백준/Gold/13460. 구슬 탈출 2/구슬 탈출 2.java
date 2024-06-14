@@ -10,6 +10,7 @@ public class Main {
 	static int N;
 	static int M;
 	static char[][] board;
+	static boolean[][][][] visited;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,6 +18,7 @@ public class Main {
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		board = new char[N][M];
+		visited = new boolean[N][M][N][M];
 
 		Ball[] ballPoints = new Ball[2];
 		for (int r = 0; r < N; r++) {
@@ -67,7 +69,10 @@ public class Main {
 						return count;
 					}
 
-					queue.add(movePoints);
+					if (!visited[movePoints[0].r][movePoints[0].c][movePoints[1].r][movePoints[1].c]) {
+						visited[movePoints[0].r][movePoints[0].c][movePoints[1].r][movePoints[1].c] = true;
+						queue.add(movePoints);
+					}
 				}
 			}
 
