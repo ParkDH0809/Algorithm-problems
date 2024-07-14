@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
 public class Main {
@@ -18,14 +20,12 @@ public class Main {
 
 		method(N, 0, N - 1);
 
-		StringBuilder sb = new StringBuilder();
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		for (int r = 0; r < arr.length; r++) {
-			for (int c = 0; c < arr[r].length; c++) {
-				sb.append(arr[r][c]);
-			}
-			sb.append("\n");
+			bw.write(arr[r]);
+			bw.write("\n");
 		}
-		System.out.print(sb);
+		bw.close();
 	}
 
 	static void method(int N, int r, int c) {
