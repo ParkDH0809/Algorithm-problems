@@ -20,33 +20,24 @@ public class Main {
             }
         }
 
-        int count = 0;
-        count += getCorrectCount();
+        int answer = 0;
+        answer += getCorrectCount();
         turnMap();
-        count += getCorrectCount();
-        System.out.print(count);
+        answer += getCorrectCount();
+        System.out.print(answer);
     }
 
     static int getCorrectCount() {
         int count = 0;
-        for(int[] lane : map) {
+        for (int[] lane : map) {
             count += checkLane(lane) ? 1 : 0;
         }
-//        for (int i = 0; i < N; i++) {
-//            if(checkLane(map[i])) {
-//                System.out.println(i + " true");
-//            } else {
-//                System.out.println(i + " false");
-//            }
-//        }
-//        System.out.println("count: " + count);
         return count;
     }
 
     static boolean checkLane(int[] lane) {
-//        System.out.println("---check start---");
         boolean[] isPlaced = new boolean[N];
-        for(int i = 0; i < N-1; i++) {
+        for (int i = 0; i < N - 1; i++) {
             if (isSameNumber(lane[i], lane[i + 1])) {
                 continue;
             }
@@ -55,7 +46,7 @@ public class Main {
                 return false;
             }
 
-            if(!(isPrevValueLarger(lane[i], lane[i + 1]) ? placeRightSlope(lane, i+1, isPlaced) : placeLeftSlope(lane, i, isPlaced))) {
+            if (!(isPrevValueLarger(lane[i], lane[i + 1]) ? placeRightSlope(lane, i + 1, isPlaced) : placeLeftSlope(lane, i, isPlaced))) {
                 return false;
             }
         }
@@ -67,31 +58,24 @@ public class Main {
             return false;
         }
 
-        for (int i = current; i < current+L; i++) {
-            if(!isSameNumber(lane[current], lane[i])) {
+        for (int i = current; i < current + L; i++) {
+            if (!isSameNumber(lane[current], lane[i])) {
                 return false;
             }
-
             isPlaced[i] = true;
         }
         return true;
     }
 
     private static boolean placeLeftSlope(int[] lane, int current, boolean[] isPlaced) {
-        if (current < L-1) {
-
+        if (current < L - 1) {
             return false;
         }
 
-        for (int i = current - L+1; i <= current; i++) {
-            if(isPlaced[i]) {
+        for (int i = current - L + 1; i <= current; i++) {
+            if (isPlaced[i] || !isSameNumber(lane[current], lane[i])) {
                 return false;
             }
-
-            if (!isSameNumber(lane[current], lane[i])) {
-                return false;
-            }
-
             isPlaced[i] = true;
         }
         return true;
@@ -111,12 +95,12 @@ public class Main {
 
     static void turnMap() {
         int[][] tempMap = new int[N][N];
-        for(int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++) {
             tempMap[i] = map[i].clone();
         }
 
-        for(int i = 0; i < N; i++) {
-            for(int j = 0; j < N; j++) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 map[i][j] = tempMap[j][i];
             }
         }
